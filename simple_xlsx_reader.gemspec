@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'simple_xlsx_reader/version'
+require 'guru_simple_xlsx_reader/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "simple_xlsx_reader"
-  gem.version       = SimpleXlsxReader::VERSION
-  gem.authors       = ["Woody Peterson"]
-  gem.email         = ["woody.peterson@gmail.com"]
+  gem.name          = "guru_simple_xlsx_reader"
+  gem.version       = GuruSimpleXlsxReader::VERSION
+  gem.authors       = ["Woody Peterson", "Ndfl_Guru_Team"]
+  gem.email         = ["woody.peterson@gmail.com", "dev@ndfl.guru"]
   gem.description   = %q{Read xlsx data the Ruby way}
   gem.summary       = %q{Read xlsx data the Ruby way}
   gem.homepage      = ""

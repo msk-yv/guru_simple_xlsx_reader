@@ -1,9 +1,9 @@
 require_relative 'test_helper'
 require 'time'
 
-SXR = SimpleXlsxReader
+SXR = GuruSimpleXlsxReader
 
-describe SimpleXlsxReader do
+describe GuruSimpleXlsxReader do
   let(:sesame_street_blog_file_path) { File.join(File.dirname(__FILE__), 'sesame_street_blog.xlsx') }
   let(:sesame_street_blog_io) { File.new(sesame_street_blog_file_path) }
   let(:expected_result) do
@@ -20,9 +20,9 @@ describe SimpleXlsxReader do
     }
   end
 
-  describe SimpleXlsxReader do
+  describe GuruSimpleXlsxReader do
     describe 'load from file path' do
-      let(:subject) { SimpleXlsxReader.open(sesame_street_blog_file_path) }
+      let(:subject) { GuruSimpleXlsxReader.open(sesame_street_blog_file_path) }
 
       it 'reads an xlsx file into a hash of {[sheet name] => [data]}' do
         subject.to_hash.must_equal(expected_result)
@@ -30,7 +30,7 @@ describe SimpleXlsxReader do
     end
 
     describe 'load from buffer' do
-      let(:subject) { SimpleXlsxReader.parse(sesame_street_blog_io) }
+      let(:subject) { GuruSimpleXlsxReader.parse(sesame_street_blog_io) }
 
       it 'reads an xlsx buffer into a hash of {[sheet name] => [data]}' do
         subject.to_hash.must_equal(expected_result)
@@ -38,9 +38,9 @@ describe SimpleXlsxReader do
     end
   end
 
-  describe SimpleXlsxReader::Document do
+  describe GuruSimpleXlsxReader::Document do
     describe 'load from file path' do
-      let(:subject) { SimpleXlsxReader::Document.new(file_path: sesame_street_blog_file_path) }
+      let(:subject) { GuruSimpleXlsxReader::Document.new(file_path: sesame_street_blog_file_path) }
 
       it 'reads an xlsx file into a hash of {[sheet name] => [data]}' do
         subject.to_hash.must_equal(expected_result)
@@ -48,7 +48,7 @@ describe SimpleXlsxReader do
     end
 
     describe 'load from buffer' do
-      let(:subject) { SimpleXlsxReader::Document.new(string_or_io: sesame_street_blog_io) }
+      let(:subject) { GuruSimpleXlsxReader::Document.new(string_or_io: sesame_street_blog_io) }
 
       it 'reads an xlsx buffer into a hash of {[sheet name] => [data]}' do
         subject.to_hash.must_equal(expected_result)

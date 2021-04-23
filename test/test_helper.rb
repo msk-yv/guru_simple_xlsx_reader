@@ -5,4 +5,4 @@ require 'pry'
 require 'time'
 
 $:.unshift File.expand_path("lib")
-require 'simple_xlsx_reader'
+require 'guru_simple_xlsx_reader'

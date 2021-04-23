@@ -1,4 +1,4 @@
-# SimpleXlsxReader [![Build Status](https://travis-ci.org/woahdae/simple_xlsx_reader.svg?branch=master)](https://travis-ci.org/woahdae/simple_xlsx_reader)
+# GuruSimpleXlsxReader [![Build Status](https://travis-ci.org/woahdae/simple_xlsx_reader.svg?branch=master)](https://travis-ci.org/woahdae/simple_xlsx_reader)
 
 An xlsx reader for Ruby that parses xlsx cell values into plain ruby
 primitives and dates/times.
@@ -11,7 +11,7 @@ then forgotten. We just want to get the data, and get out!
 
 ### Summary:
 
-    doc = SimpleXlsxReader.open('/path/to/workbook.xlsx')
+    doc = GuruSimpleXlsxReader.open('/path/to/workbook.xlsx')
     doc.sheets # => [<#SXR::Sheet>, ...]
     doc.sheets.first.name # 'Sheet1'
     doc.sheets.first.rows # [['Header 1', 'Header 2', ...]
@@ -22,10 +22,10 @@ That's it!
 ### Load Errors
 
 By default, cell load errors (ex. if a date cell contains the string
-'hello') result in a SimpleXlsxReader::CellLoadError.
+'hello') result in a GuruSimpleXlsxReader::CellLoadError.
 
 If you would like to provide better error feedback to your users, you
-can set `SimpleXlsxReader.configuration.catch_cell_load_errors =
+can set `GuruSimpleXlsxReader.configuration.catch_cell_load_errors =
 true`, and load errors will instead be inserted into Sheet#load_errors keyed
 by [rownum, colnum].
 
@@ -33,7 +33,7 @@ by [rownum, colnum].
 
 Here's the totality of the public api, in code:
 
-    module SimpleXlsxReader
+    module GuruSimpleXlsxReader
       def self.open(file_path)
         Document.new(file_path: file_path).tap(&:sheets)
       end
