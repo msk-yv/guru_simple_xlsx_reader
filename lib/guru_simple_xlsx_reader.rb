@@ -8,15 +8,15 @@ begin
   # Try loading rubyzip < 1.0
   require 'zip/zip'
   require 'zip/zipfilesystem'
-  SimpleXlsxReader::Zip = Zip::ZipFile
+  GuruSimpleXlsxReader::Zip = Zip::ZipFile
 rescue LoadError
   # Try loading rubyzip >= 1.0
   require 'zip'
   require 'zip/filesystem'
-  SimpleXlsxReader::Zip = Zip::File
+  GuruSimpleXlsxReader::Zip = Zip::File
 end
 
-module SimpleXlsxReader
+module GuruSimpleXlsxReader
   class CellLoadError < StandardError; end
 
   # We support hyperlinks as a "type" even though they're technically
@@ -107,7 +107,7 @@ module SimpleXlsxReader
 
       def self.load(string_or_io)
         self.new.tap do |xml|
-          SimpleXlsxReader::Zip.open_buffer(string_or_io) do |zip|
+          GuruSimpleXlsxReader::Zip.open_buffer(string_or_io) do |zip|
             xml.sheets = []
             xml.sheet_rels = []
 
@@ -208,7 +208,7 @@ module SimpleXlsxReader
           # And yes, this really is faster than using xcell.at_xpath(...),
           # by about 60%. Odd.
           xvalue = type == 'inlineStr' ?
-            (xis = xcell.children.find {|c| c.name == 'is'}) && xis.children.find {|c| c.name == 't'} :
+            (xis = xcell.children.find {|c| c.name == 'is'}) && xis.children.children.find {|c| c.name == 't'} :
             xcell.children.find {|c| c.name == 'f' && c.text.start_with?('HYPERLINK(') || c.name == 'v'}
 
           if xvalue
@@ -227,7 +227,7 @@ module SimpleXlsxReader
                             :shared_strings => shared_strings,
                             :base_date => base_date)
           rescue => e
-            if !SimpleXlsxReader.configuration.catch_cell_load_errors
+            if !GuruSimpleXlsxReader.configuration.catch_cell_load_errors
               error = CellLoadError.new(
                 "Row #{row_idx}, Col #{col_idx}: #{e.message}")
               error.set_backtrace(e.backtrace)
