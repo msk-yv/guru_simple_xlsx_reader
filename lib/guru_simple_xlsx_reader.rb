@@ -1,4 +1,4 @@
-require "simple_xlsx_reader/version"
+require "guru_simple_xlsx_reader/version"
 require 'nokogiri'
 require 'date'
 
